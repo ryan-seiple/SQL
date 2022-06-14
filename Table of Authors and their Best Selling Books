@@ -1,0 +1,57 @@
+* -- I created a table titled 'authors' that lists thirteen different authors that includes: their name, date of birth, primary genre, and amount of books they have written up to 6/14/2022.
+
+CREATE TABLE authors (id INTEGER PRIMARY KEY, year_born INTEGER, author TEXT, genre TEXT, amount_written INTEGER);
+
+insert into authors values (1, 1892, 'Tolkien', 'Fantasy', 29);
+insert into authors values (2, 1965, 'Rowling', 'Fantasy', 23);
+insert into authors values (3, 1898, 'Lewis', 'Fantasy', 17);
+insert into authors values (4, 1947, 'King', 'Horror', 64);
+insert into authors values (5, 1952, 'Barker', 'Horror', 20);
+insert into authors values (6, 1866, 'Wells', 'SciFi', 51);
+insert into authors values (7, 1890, 'Christie', 'Mystery', 66);
+insert into authors values (8, 1890, 'Lovecraft', 'SciFi', 65);
+insert into authors values (9, 1931, 'Cussler', 'Thriller', 87);
+insert into authors values (10, 1965, 'Sparks', 'Romance', 22);
+insert into authors values (11, 1947, 'Patterson', 'Thriller', 167);
+insert into authors values (12, 1971, 'Butcher', 'Fantasy', 30);
+insert into authors values (13, 1973, 'Meyer', 'Romance', 6);
+
+* -- I created a table titled 'bestselling_books' that lists the same thirteen authors in the 'authors' table, along with the title of their best selling book and how many copies of that book had been sold up to 6/14/2022.
+
+CREATE TABLE bestselling_books (author TEXT, title TEXT, copies_sold INTEGER);
+
+insert into bestselling_books values ('Meyer', 'Twilight', 47000000);
+insert into bestselling_books values ('King', 'The Shining', 692202);
+insert into bestselling_books values ('Wells', 'Anticipation', null);
+insert into bestselling_books values ('Christie', 'The Murder of Roger Ackroyd', null);
+insert into bestselling_books values ('Butcher', 'Changes', 125000);
+insert into bestselling_books values ('Cussler', 'Raise the Titanic!', 300000);
+insert into bestselling_books values ('Lovecraft', 'The Call of Cthulu', 110000);
+insert into bestselling_books values ('Tolkien', 'The Lord of the Rings', 150000000);
+insert into bestselling_books values ('Sparks', 'The Notebook', 135000);
+insert into bestselling_books values ('Rowling', 'Harry Potter', 500000000);
+insert into bestselling_books values ('Barker', 'Hellraiser', 103400);
+insert into bestselling_books values ('Patterson', 'Alex Cross', 400000000);
+insert into bestselling_books values ('Lewis', 'The Chronicles of Narnia', 104000000);
+
+* -- I pulled all data from the 'authors' table and ordered it by amount of books the authors had written up to 6/14/2022
+
+select * from authors
+order by amount_written;
+
+* -- I pulled all data from both tables seperately, and then joined them based off of all of their data in order to make it easier to decide which specific data I wanted to pull from each table and join, and how I wanted to order it.
+
+select* from authors;
+select* from bestselling_books;
+
+select * from authors
+inner join bestselling_books
+on authors.author=bestselling_books.author;
+
+* -- I pulled the authors names and primary genres from the 'authors' table and the amount of copies their best selling books sold from the 'bestselling_books' table and joined them into one table. I then ordered the new table in ascending order based on how many copies of the author's best selling book sold up to 6/14/2022.
+
+select authors.author, authors.genre, bestselling_books.copies_sold
+from authors
+inner join bestselling_books
+on authors.author=bestselling_books.author
+order by copies_sold;
